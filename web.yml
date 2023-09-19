@@ -1,0 +1,23 @@
+---
+- name: Setup a webserver
+  hosts: servera
+  tasks:
+    - name: Install httpd
+      ansible.builtin.yum:
+         name: httpd
+    - name: Deliver the content
+      ansible.builtin.copy:
+         content: Hello World
+         dest: /var/www/html/index.html
+    - name: Start and enable httpd
+      ansible.builtin.service:
+         name: httpd
+         state: started
+         enabled: yes
+    - name: Open firewall
+      ansible.posix.firewalld:
+         service: http
+         immediate: yes
+         state: enabled
+         permanent: yes
+...
