@@ -1,0 +1,13 @@
+---
+- name: Create resourcegroup
+  hosts: localhost
+  tasks:
+   - name: Create a Resource Group
+     azure_rm_resourcegroup:
+        name: hackathon-test
+        location: eastasia
+     register: rg
+   - name: Display
+     debug:
+       var: rg
+...
