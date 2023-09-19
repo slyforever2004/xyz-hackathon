@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Get facts for all resource groups
+      azure_rm_resourcegroup_info:
+      register: rg
+    - name: Print
+      debug:
+       var: rg
+      
