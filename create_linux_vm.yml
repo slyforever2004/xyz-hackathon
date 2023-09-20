@@ -43,7 +43,7 @@
       register: nsg
     - name: Create a Virtual Network Interface Card
       azure_rm_networkinterface:
-        resource_group: "{{ rg_name }}"
+        resource_group: "tfcloudRG02"
         name: "{{ vm_name }}-nic"
         virtual_network: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
