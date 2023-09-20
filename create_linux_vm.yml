@@ -6,6 +6,7 @@
     #vm_size: "Standard_B1ls"
     vm_size: Standard_DS1_v2
     vm_image: "RedHat:RHEL:8-LVM:latest"
+    storage_account: "tfcloudblobtest010"
     vm_username: "mladmin"
     vm_password: "my-Password@1234"
     rg_name: "hackathon-test-rg"
