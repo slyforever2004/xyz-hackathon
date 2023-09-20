@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Get facts for all resource groups
+    - name: Get info resource groups
       azure_rm_resourcegroup_info:
       register: rg
     - name: Print
