@@ -1,0 +1,9 @@
+#This Playbook works on dynamic inventory created in controller.Need to choose dynamic inventory
+- name: Get Virtual Machine disk details Using Ansible
+  hosts: all
+  tasks:
+  
+   - name: Print the disk size only for sd disks
+     debug:
+      msg: "{{ ansible_facts.devices[item].size }}"
+     loop: "{{ ansible_facts.devices.keys() | map('regex_search', 'sd.*') | select('string') | list }}"
