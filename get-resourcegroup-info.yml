@@ -3,7 +3,7 @@
   tasks:
     - name: Get resource groups facts
       azure_rm_resourcegroup_info:
-        name: {{ rg_name }}
+        name: "{{ rg_name }}"
       register: rg
     - name: Print
       debug:
