@@ -55,6 +55,7 @@
         resource_group: "{{ rg_name }}"
         name: "{{ vm_name }}"
         vm_size: "{{ vm_size }}"
+        managed_disk_type: Premium_LRS
         admin_username: "{{ vm_username }}"
         admin_password: "{{ vm_password }}"
         image:
