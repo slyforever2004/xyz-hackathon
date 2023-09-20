@@ -2,17 +2,16 @@
 - name: Create a Virtual Machine on Azure Using Ansible
   hosts: localhost
   vars:
-    vm_name: "hackathon-test-linux"
+    vm_name: "Hackathon-test-linux"
     #vm_size: "Standard_B1ls"
     vm_size: Standard_DS1_v2
     vm_image: "RedHat:RHEL:8-LVM:latest"
-    storage_account: "tfcloudblobtest010"
     vm_username: "mladmin"
-    vm_password: "my-Password@1234"
-    rg_name: "hackathon-test-rg"
-    vnet_name: "tfcloud-test-vnet02"
-    subnet_name: "PEP"
-    location: "eastasia"
+    vm_password: "my-password@1234"
+    rg_name: "Hackathon-test-rg"
+    vnet_name: "VNET-Hackathon-test-01"
+    subnet_name: "VM-PEP"
+    location: "centralindia"
     
 
   tasks:
@@ -21,6 +20,19 @@
         name: "{{ rg_name }}"
         location: "{{ location }}"
       register: rg
+    - name: Create a Virtual Network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ rg_name }}"
+        name: "{{ vnet_name }}"
+        address_prefixes: "10.0.0.0/16"
+      register: vnet
+    - name: Create a subnet
+      azure_rm_subnet:
+        resource_group: "{{ rg_name }}"
+        virtual_network_name: "{{ vnet_name }}"
+        name: "{{ subnet_name }}"
+        address_prefix: "10.0.0.0/24"
+      register: subnet
     - name: Create a public IP address
       azure_rm_publicipaddress:
         resource_group: "{{ rg_name }}"
@@ -44,7 +56,7 @@
       register: nsg
     - name: Create a Virtual Network Interface Card
       azure_rm_networkinterface:
-        resource_group: "tfcloudRG02"
+        resource_group: "{{ rg_name }}"
         name: "{{ vm_name }}-nic"
         virtual_network: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
@@ -55,7 +67,6 @@
         resource_group: "{{ rg_name }}"
         name: "{{ vm_name }}"
         vm_size: "{{ vm_size }}"
-        managed_disk_type: Premium_LRS
         admin_username: "{{ vm_username }}"
         admin_password: "{{ vm_password }}"
         image:
