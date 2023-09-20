@@ -9,8 +9,8 @@
     vm_username: "mladmin"
     vm_password: "my-Password@1234"
     rg_name: "hackathon-test-rg"
-    vnet_name: "VNET-EAS-CHAOS-POT-01"
-    subnet_name: "Application"
+    vnet_name: "tfcloud-test-vnet02"
+    subnet_name: "PEP"
     location: "eastasia"
     
 
