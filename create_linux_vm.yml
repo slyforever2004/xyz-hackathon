@@ -2,16 +2,16 @@
 - name: Create a Virtual Machine on Azure Using Ansible
   hosts: localhost
   vars:
-    vm_name: "Test-Ansible"
+    vm_name: "hackathon-test-linux"
     #vm_size: "Standard_B1ls"
     vm_size: Standard_DS1_v2
     vm_image: "RedHat:RHEL:8-LVM:latest"
-    vm_username: "testansible"
-    vm_password: "my-password@1234"
-    rg_name: "test-ansible"
-    vnet_name: "test-ansible"
-    subnet_name: "test-ansible"
-    location: "centralindia"
+    vm_username: "mladmin"
+    vm_password: "my-Password@1234"
+    rg_name: "hackathon-test-rg"
+    vnet_name: "VNET-EAS-CHAOS-POT-01"
+    subnet_name: "Application"
+    location: "eastasia"
     
 
   tasks:
@@ -20,19 +20,6 @@
         name: "{{ rg_name }}"
         location: "{{ location }}"
       register: rg
-    - name: Create a Virtual Network
-      azure_rm_virtualnetwork:
-        resource_group: "{{ rg_name }}"
-        name: "{{ vnet_name }}"
-        address_prefixes: "10.0.0.0/16"
-      register: vnet
-    - name: Create a subnet
-      azure_rm_subnet:
-        resource_group: "{{ rg_name }}"
-        virtual_network_name: "{{ vnet_name }}"
-        name: "{{ subnet_name }}"
-        address_prefix: "10.0.0.0/24"
-      register: subnet
     - name: Create a public IP address
       azure_rm_publicipaddress:
         resource_group: "{{ rg_name }}"
