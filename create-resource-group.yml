@@ -4,8 +4,8 @@
   tasks:
    - name: Create a Resource Group
      azure_rm_resourcegroup:
-        name: hackathon-test
-        location: eastasia
+        name: {{rg_name}}
+        location: {{rg_location}}
      register: rg
    - name: Display
      debug:
