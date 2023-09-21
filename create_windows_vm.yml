@@ -72,17 +72,6 @@
           sku: 2019-Datacenter
           version: latest
 
-  - name: Create VM script extension to enable HTTPS WinRM listener
-    azure_rm_virtualmachineextension:
-      name: winrm-extension
-      resource_group: Hackathon-test-rg
-      virtual_machine_name: Hacktestwin
-      publisher: Microsoft.Compute
-      virtual_machine_extension_type: CustomScriptExtension
-      type_handler_version: '1.9'
-      settings: '{"fileUris": ["https://github.com/ansible/ansible-documentation/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"],"commandToExecute": "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1"}'
-      auto_upgrade_minor_version: true
-
   - name: Get facts for one Public IP
     azure_rm_publicipaddress_info:
       resource_group: Hackathon-test-rg
