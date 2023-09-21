@@ -60,7 +60,7 @@
   - name: Create VM
     azure_rm_virtualmachine:
       resource_group: Hackathon-test-rg
-      name: win-vm
+      name: Hackathon-test-windows
       vm_size: Standard_DS1_v2
       admin_username: azureuser
       admin_password: "{{ password }}"
@@ -77,7 +77,7 @@
     azure_rm_virtualmachineextension:
       name: winrm-extension
       resource_group: Hackathon-test-rg
-      virtual_machine_name: win-vm
+      virtual_machine_name: Hackathon-test-windows
       publisher: Microsoft.Compute
       virtual_machine_extension_type: CustomScriptExtension
       type_handler_version: '1.9'
